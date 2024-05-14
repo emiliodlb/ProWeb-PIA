@@ -4,7 +4,7 @@ body {
 }
 
 .portada {
-    background-image: url('img/portada_index.jpg');
+    background-image: url('/img/portada_index.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;
