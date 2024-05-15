@@ -1,6 +1,6 @@
 <?php
 
-$config['nombre_servidor'] = 'localhost';
-$config['nombre_usuario'] = 'root';
-$config['password'] = '';
-$config['nombre_bd'] = 'restaurante';
+$nombre_servidor = 'localhost';
+$nombre_usuario = 'root';
+$password = '';
+$nombre_bd = 'restaurante';

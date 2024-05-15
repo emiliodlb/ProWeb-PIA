@@ -70,3 +70,7 @@ footer{
 .nav-link:hover {
     color: #ffc107; 
 }
+
+.db_test {
+    text-align: center;
+}

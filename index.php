@@ -62,6 +62,17 @@
                     </div>
                 </div>
             </div>
+            <br>
+            <h2> Test de Conexion de BD </h2>
+            <div class='db_test'>
+                <?php
+                include_once 'app/conexion.inc.php';
+                conexion :: abrir_conexion(); 
+                conexion :: cerrar_conexion();
+                ?>
+            </div>
+            
+            
         </section>
     </main>
     <footer>
