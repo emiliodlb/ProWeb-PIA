@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="">
                 <img src="img/icon_logo.png" alt="" width="30" height="30" class="d-inline-block align-top">
                 FlashFeast
             </a>
@@ -21,13 +21,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="">Inicio <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="login.php">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Quiénes Somos</a>
+                        <a class="nav-link" href="">Quiénes Somos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sucursales</a>
+                        <a class="nav-link" href="">Sucursales</a>
                     </li>
                 </ul>
             </div>
@@ -35,11 +35,11 @@
     </header>
     <main>
         <section class="portada">
-            <div class="container">
-                <h1>Bienvenidos a FlashFeast</h1>
-                <p><b>Disfruta de nuestra deliciosa comida y excelente servicio</b></p>
-                <button class="btn btn-primary">PEDIR AHORA</button>
-            </div>
+        <div class="container">
+            <h1>Bienvenidos a FlashFeast</h1>
+            <p><b>Disfruta de nuestra deliciosa comida y excelente servicio</b></p>
+            <a href="login.php" class="btn btn-secondary">PEDIR AHORA</a>
+        </div>
         </section>
         <section class="features">
             <div class="container">
@@ -63,7 +63,6 @@
                 </div>
             </div>
             <br>
-            <h2> Test de Conexion de BD </h2>
             <div class='db_test'>
                 <?php
                 include_once 'app/conexion.inc.php';

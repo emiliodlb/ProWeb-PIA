@@ -13,7 +13,7 @@ class conexion {
                 self::$conexion ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 self::$conexion -> exec("SET CHARACTER SET utf8");
 
-                print'Conexion ABIERTA'.'<br>';
+                
             } catch (PODExeption $ex){
                 print "ERROR: " . $ex -> getMessage() . "<br>";
                 die();
@@ -24,7 +24,7 @@ class conexion {
     public static function cerrar_conexion(){
         if (isset(self::$conexion)){
             self::$conexion = null;
-            print'Conexion CERRADA';
+            
         }
     }
     public static function obtener_conexion() {

@@ -1,0 +1,20 @@
+.login-form {
+    width: 300px;
+    margin: 100px auto;
+}
+
+.card-body a, button {
+    text-align: center;
+    margin-top: 20px;
+    width: 100%; 
+}
+
+.navbar-toggler {
+    border-color: #fff; 
+}
+.navbar-toggler:focus {
+    outline: none;
+}
+.nav-link:hover {
+    color: #ffc107; 
+}
