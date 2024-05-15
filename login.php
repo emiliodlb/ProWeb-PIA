@@ -6,10 +6,11 @@
     <title>Login</title>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/login.css">
+    <link rel="shortcut icon" href="img/icon_logo.png">
 </head>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="index.html">
                 <img src="img/icon_logo.png" alt="" width="30" height="30" class="d-inline-block align-top">
                 FlashFeast
             </a>
@@ -19,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="">Login <span class="sr-only"></span></a>
+                        <a class="nav-link" href="">Login<span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">Quiénes Somos</a>
@@ -73,7 +74,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
                         </form>
-                        <a href="index.php" class="btn btn-secondary btn-block back-to-index">Regresar a la página de inicio</a>
+                        <a href="index.html" class="btn btn-secondary btn-block back-to-index">Regresar a la página de inicio</a>
                     </div>
                 </div>
             </div>
