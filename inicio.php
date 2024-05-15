@@ -38,7 +38,7 @@
             <div class="col-md-4">
                 <a href="historial_ordenes.php" class="btn btn-secondary btn-dashboard">
                     Historial de Órdenes
-                    <img src="">
+                    <img src="img/historial_ordenes.png">
                 </a>
             </div>
         </div>
@@ -46,19 +46,19 @@
             <div class="col-md-4">
                 <a href="modificar_orden.php" class="btn btn-secondary btn-dashboard">
                     Modificar Orden
-                    <img src="">
+                    <img src="img/modificar_orden.png">
                 </a>
             </div>
             <div class="col-md-4">
                 <a href="visualizar_productos.php" class="btn btn-secondary btn-dashboard">
                     Visualizar Productos
-                    <img src="">
+                    <img src="img/visualizar_productos.png">
                 </a>
             </div>
             <div class="col-md-4">
                 <a href="visualizar_empleados.php" class="btn btn-secondary btn-dashboard">
                     Visualizar Empleados
-                    <img src="">
+                    <img src="img/visualizar_empleados.png">
                 </a>
             </div>
         </div>
