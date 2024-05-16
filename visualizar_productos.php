@@ -11,6 +11,7 @@
 
 <div class="container mt-5">
     <h2>Productos Registrados</h2>
+    <a href="inicio.php" class="btn btn-secondary mt-3">Regresar</a>
     <table class="table mt-3">
         <thead>
             <tr>

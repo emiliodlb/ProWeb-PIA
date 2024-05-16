@@ -38,18 +38,18 @@
                     break;
                 case 2: // Si el rol es 2
                     $generar_orden_link = 'modificar_orden.php';
-                    $mesas_disponibles_link = 'visualizar_productos.php';
-                    $historial_ordenes_link = 'visualizar_empleados.php';
+                    $mesas_disponibles_link = 'mesas_disponibles.php';
+                    $historial_ordenes_link = 'historial_ordenes.php';
                     $modificar_orden_link = 'modificar_orden.php';
-                    $visualizar_productos = 'visualizar_productos.php';
+                    $visualizar_productos_link = 'visualizar_productos.php';
                     $visualizar_empleados_link = 'visualizar_empleados.php';
                     break;
                 case 3: // Si el rol es 3
-                    $generar_orden_link = 'visualizar_productos.php';
-                    $mesas_disponibles_link = 'visualizar_empleados.php';
-                    $historial_ordenes_link = 'generar_orden.php';
+                    $generar_orden_link = 'generar_orden.php';
+                    $mesas_disponibles_link = 'mesas_disponibles.php';
+                    $historial_ordenes_link = 'historial_ordenes.php';
                     $modificar_orden_link = 'modificar_orden.php';
-                    $visualizar_productos = 'visualizar_productos.php';
+                    $visualizar_productos_link = '#';
                     $visualizar_empleados_link = '#';
                     break;
                 default:
