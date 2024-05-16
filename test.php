@@ -23,13 +23,11 @@
 
         <h1 class="text-center">Bienvenido, <?php echo $usuario['NombreUsuario']; ?>!</h1>
         <br>
-        <?php 
-        echo "El ID del Rol del usuario es: " . $rol;
-        print_r($_SESSION['usuario'])
-        ?>
+        <?php echo "El ID del Rol del usuario es: " . $rol?>
         <br>
         <div class="row">
             <?php
+            // Definir los enlaces de los botones según el rol del usuario
             $rol = $usuario['IdRol'];
             switch ($rol) {
                 case 1: // Si el rol es 1
@@ -38,7 +36,7 @@
                     $historial_ordenes_link = 'historial_ordenes.php';
                     $modificar_orden_link = 'modificar_orden.php';
                     $visualizar_productos_link = 'visualizar_productos.php';
-                    $visualizar_empleados_link = 'visualizar_empleados_admin.php';
+                    $visualizar_empleados_link = 'visualizar_empleados.php';
                     break;
                 case 2: // Si el rol es 2
                     $generar_orden_link = 'modificar_orden.php';
@@ -54,7 +52,7 @@
                     $historial_ordenes_link = 'generar_orden.php';
                     $modificar_orden_link = 'modificar_orden.php';
                     $visualizar_productos = 'visualizar_productos.php';
-                    $visualizar_empleados_link = '#';
+                    $visualizar_empleados_link = 'svisualizar_empleados.php';
                     break;
                 default:
                     
@@ -94,7 +92,7 @@
             </div>
             <div class="col-md-4">
                 <a href="<?php echo $visualizar_empleados_link; ?>" class="btn btn-secondary btn-dashboard">
-                    Visualizar usuarios
+                    Visualizar Empleados
                     <img src="img/visualizar_empleados.png">
                 </a>
             </div>
