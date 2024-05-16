@@ -11,7 +11,10 @@
 
 <div class="container mt-5">
     <h2>Usuarios Registrados</h2>
-    <button type="button" class="btn btn-success mt-3" id="btnAgregarUsuario" data-toggle="modal" data-target="#modalAgregarUsuario">Agregar Usuario</button>
+    <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-success mt-3" id="btnAgregarUsuario" data-toggle="modal" data-target="#modalAgregarUsuario">Agregar Usuario</button>
+        <a href="inicio.php" class="btn btn-secondary mt-3">Regresar</a>
+    </div>
     <table class="table mt-3">
         <thead>
             <tr>

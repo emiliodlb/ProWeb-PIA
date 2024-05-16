@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios Registrados</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        /* Estilos personalizados */
-    </style>
 </head>
 <body>
 
 <div class="container mt-5">
     <h2>Usuarios Registrados</h2>
+    <a href="inicio.php" class="btn btn-secondary mt-3">Regresar</a>
     <table class="table mt-3">
         <thead>
             <tr>

@@ -23,10 +23,6 @@
 
         <h1 class="text-center">Bienvenido, <?php echo $usuario['NombreUsuario']; ?>!</h1>
         <br>
-        <?php 
-        echo "El ID del Rol del usuario es: " . $rol;
-        print_r($_SESSION['usuario'])
-        ?>
         <br>
         <div class="row">
             <?php
@@ -100,6 +96,11 @@
             </div>
         </div>
     </div>
+    <div class="container">
+    <div class="text-center mt-3">
+        <a href="index.html" class="btn btn-secondary back-to-index">Regresar</a>
+    </div>
+</div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="scripts/bootstrap.bundle.min.js"></script>
 </body>
