@@ -33,7 +33,7 @@
                     $mesas_disponibles_link = 'mesas_disponibles.php';
                     $historial_ordenes_link = 'historial_ordenes.php';
                     $modificar_orden_link = 'modificar_orden.php';
-                    $visualizar_productos_link = 'visualizar_productos.php';
+                    $visualizar_productos_link = 'visualizar_productos_admin.php';
                     $visualizar_empleados_link = 'visualizar_empleados_admin.php';
                     break;
                 case 2: // Si el rol es 2

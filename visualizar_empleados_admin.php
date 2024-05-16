@@ -149,7 +149,6 @@
 
     $(document).ready(function() {
 
-        // Función para abrir el modal y cargar los datos del usuario a editar
         $('.btn-editar').click(function(){
             var idUsuario = $(this).data('id');
             var nombreUsuario = $(this).data('nombre');
