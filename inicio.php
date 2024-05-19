@@ -32,7 +32,7 @@
                     $generar_orden_link = 'menu_productos.php';
                     $mesas_disponibles_link = 'mesas_disponibles.php';
                     $historial_ordenes_link = 'historial_ordenes.php';
-                    $modificar_orden_link = 'modificar_orden.php';
+                    $modificar_orden_link = 'modificar_estatus.php';
                     $visualizar_productos_link = 'visualizar_productos_admin.php';
                     $visualizar_empleados_link = 'visualizar_empleados_admin.php';
                     break;
@@ -40,7 +40,7 @@
                     $generar_orden_link = 'menu_productos.php';
                     $mesas_disponibles_link = 'mesas_disponibles.php';
                     $historial_ordenes_link = 'historial_ordenes.php';
-                    $modificar_orden_link = 'modificar_orden.php';
+                    $modificar_orden_link = 'modificar_estatus.php';
                     $visualizar_productos_link = 'visualizar_productos.php';
                     $visualizar_empleados_link = 'visualizar_empleados.php';
                     break;
@@ -48,7 +48,7 @@
                     $generar_orden_link = 'menu_productos.php';
                     $mesas_disponibles_link = 'mesas_disponibles.php';
                     $historial_ordenes_link = 'historial_ordenes.php';
-                    $modificar_orden_link = 'modificar_orden.php';
+                    $modificar_orden_link = 'modificar_estatus.php';
                     $visualizar_productos_link = '#';
                     $visualizar_empleados_link = '#';
                     break;
@@ -78,7 +78,7 @@
             </div>
             <div class="col-md-4">
                 <a href="<?php echo $modificar_orden_link; ?>" class="btn btn-secondary btn-dashboard">
-                    Modificar Orden
+                    Modificar Estatus
                     <img src="img/modificar_orden.png">
                 </a>
             </div>
