@@ -48,6 +48,18 @@ try {
         $query->execute();
     }
 
+    //detalles de la orden recién creada
+    $query = $conexion->prepare("SELECT * FROM orden WHERE IdOrden = :IdOrden");
+    $query->bindParam(':IdOrden', $IdOrden, PDO::PARAM_INT);
+    $query->execute();
+    $orden = $query->fetch(PDO::FETCH_ASSOC);
+
+    //detalles de los productos en la orden
+    $query = $conexion->prepare("SELECT p.NombreProducto, d.Cantidad, d.Precio FROM detalleorden d JOIN producto p ON d.IdProducto = p.IdProducto WHERE d.IdOrden = :IdOrden");
+    $query->bindParam(':IdOrden', $IdOrden, PDO::PARAM_INT);
+    $query->execute();
+    $productosOrden = $query->fetchAll(PDO::FETCH_ASSOC);
+
     conexion::cerrar_conexion();
     unset($_SESSION['carrito']);
 
@@ -66,6 +78,15 @@ try {
 <body>
     <h1>Orden Generada</h1>
     <p>Su orden ha sido generada exitosamente.</p>
+    <p>ID de la orden: <?php echo $orden['IdOrden']; ?></p>
+    <p>Total de la orden: <?php echo $orden['TotalOrden']; ?></p>
+    <p>Fecha de la orden: <?php echo $orden['FechaOrden']; ?></p>
+    <h2>Productos de la orden:</h2>
+    <ul>
+    <?php foreach ($productosOrden as $producto) { ?>
+        <li><?php echo $producto['NombreProducto']; ?> - Cantidad: <?php echo $producto['Cantidad']; ?> - Precio: <?php echo $producto['Precio']; ?></li>
+    <?php } ?>
+    </ul>
     <a href="inicio.php">Volver a productos</a>
 </body>
 </html>
