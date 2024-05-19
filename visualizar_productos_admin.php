@@ -10,8 +10,6 @@
 
 <div class="container mt-5">
     <h2>Productos Registrados</h2>
-    
-    <!-- Barra de búsqueda -->
     <form class="form-inline mt-3 mb-3" method="get" action="">
         <input class="form-control mr-sm-2" type="search" name="search" placeholder="Buscar" aria-label="Buscar">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>

@@ -1,0 +1,15 @@
+.estado-activo {
+    color: green;
+}
+
+.estado-preparando {
+    color: orange;
+}
+
+.estado-entregado {
+    color: blue;
+}
+
+.estado-cancelado {
+    color: red;
+}

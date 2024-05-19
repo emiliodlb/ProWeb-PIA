@@ -39,8 +39,8 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Órdenes Recientes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/ordenes.css">
-</head>
+    <link rel="stylesheet" href="styles/estatus.css">
+
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Órdenes Recientes</h1>
@@ -70,7 +70,7 @@ try {
                         <td><?php echo $orden['IdOrden']; ?></td>
                         <td><?php echo $orden['NombreUsuario']; ?></td>
                         <td><?php echo $orden['FechaOrden']; ?></td>
-                        <td><?php echo $orden['NombreEstatus']; ?></td>
+                        <td class="<?php echo 'estado-' . strtolower($orden['NombreEstatus']); ?>"><?php echo $orden['NombreEstatus']; ?></td>
                         <td>
                             <form action="cambiar_estatus.php" method="post">
                                 <input type="hidden" name="idOrden" value="<?php echo $orden['IdOrden']; ?>">
@@ -78,7 +78,7 @@ try {
                                     <option value="1" <?php if($orden['IdEstatusOrden'] == 1) echo 'selected'; ?>>ACTIVO</option>
                                     <option value="2" <?php if($orden['IdEstatusOrden'] == 2) echo 'selected'; ?>>PREPARANDO</option>
                                     <option value="3" <?php if($orden['IdEstatusOrden'] == 3) echo 'selected'; ?>>ENTREGADO</option>
-                                    <option value="4" <?php if($orden['IdEstatusOrden'] == 4) echo 'selected'; ?>>CANCELADA</option>
+                                    <option value="4" <?php if($orden['IdEstatusOrden'] == 4) echo 'selected'; ?>>CANCELADO</option>
                                 </select>
                                 <button type="submit" class="btn btn-primary btn-sm mt-2">Cambiar</button>
                             </form>
