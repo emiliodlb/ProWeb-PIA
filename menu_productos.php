@@ -12,7 +12,7 @@ include_once 'app/conexion.inc.php';
 
 conexion::abrir_conexion();
 
-// agregado de productos en db
+// Procesar forms
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['idproducto']) && isset($_POST['cantidad'])) {
     $idProducto = $_POST['idproducto'];
     $cantidad = $_POST['cantidad'];
@@ -49,10 +49,18 @@ if (isset($_SESSION['eliminar_carrito']) && $_SESSION['eliminar_carrito'] === tr
     unset($_SESSION['eliminar_carrito']);
 }
 
-// Obtiene los productos de la DB
-$sql = "SELECT * FROM producto";
-$resultado = conexion::obtener_conexion()->query($sql);
+// Obtener búsqueda
+$search = isset($_GET['search']) ? $_GET['search'] : '';
 
+// Obtener los productos de la DB
+$sql = "SELECT * FROM producto WHERE NombreProducto LIKE :search";
+$stmt = conexion::obtener_conexion()->prepare($sql);
+$likeSearch = "%" . $search . "%";
+$stmt->bindParam(':search', $likeSearch, PDO::PARAM_STR);
+$stmt->execute();
+$resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+conexion::cerrar_conexion();
 ?>
 <!DOCTYPE html>
 <html>
@@ -65,24 +73,33 @@ $resultado = conexion::obtener_conexion()->query($sql);
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-5 mb-4">Catálogo de Productos</h1>
-        <div class="row mt-3">
-            <div class="col-md-12 text-center">
-                <a href="inicio.php" class="btn btn-secondary">Regresar</a>
-                <a href="carrito.php" class="btn btn-primary">Ver Carrito</a>
+        <h1 class="mt-5 mb-4">Menu Disponible</h1>
+        
+        <div class="d-flex justify-content-between mb-6">
+            <div class="form-inline">
+                <form class="form-inline" method="get" action="">
+                    <input class="form-control mr-3" type="search" name="search" placeholder="Buscar" aria-label="Buscar" value="<?php echo htmlspecialchars($search); ?>">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+            <div>
+                <a href="inicio.php" class="btn btn-outline-primary">Regresar a Inicio</a>
+
             </div>
         </div>
-        <div class="d-flex justify-content-between">
         
         <br>
-    </div>
+        <div class="row">
+        <a href="carrito.php" class="btn btn-primary">Ver Carrito</a>
+        </div>
         <br>
         <div class="row">
+            
             <!-- productos -->
             <?php
-            if ($resultado->rowCount() > 0) {
+            if (count($resultado) > 0) {
                 // Mostrar los productos
-                while($producto = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                foreach ($resultado as $producto) {
                     ?>
                     <div class="col-md-4 producto">
                         <div class="card">

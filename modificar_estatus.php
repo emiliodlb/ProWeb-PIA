@@ -32,7 +32,6 @@ try {
     die();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -49,44 +48,46 @@ try {
         <div class="d-flex justify-content-between mb-4">
             <form class="form-inline" method="get" action="">
                 <input class="form-control mr-sm-2" type="search" name="search" placeholder="Buscar" aria-label="Buscar" value="<?php echo htmlspecialchars($search); ?>">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Buscar</button>
             </form>
             <a href="inicio.php" class="btn btn-outline-primary">Regresar a Inicio</a>
         </div>
         
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">ID Orden</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Fecha de la Orden</th>
-                    <th scope="col">Estatus</th>
-                    <th scope="col">Cambiar Estatus</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($ordenes as $orden): ?>
-                <tr>
-                    <td><?php echo $orden['IdOrden']; ?></td>
-                    <td><?php echo $orden['NombreUsuario']; ?></td>
-                    <td><?php echo $orden['FechaOrden']; ?></td>
-                    <td><?php echo $orden['NombreEstatus']; ?></td>
-                    <td>
-                        <form action="cambiar_estatus.php" method="post">
-                            <input type="hidden" name="idOrden" value="<?php echo $orden['IdOrden']; ?>">
-                            <select class="form-control" name="nuevoEstatus">
-                                <option value="1" <?php if($orden['IdEstatusOrden'] == 1) echo 'selected'; ?>>ACTIVO</option>
-                                <option value="2" <?php if($orden['IdEstatusOrden'] == 2) echo 'selected'; ?>>PREPARANDO</option>
-                                <option value="3" <?php if($orden['IdEstatusOrden'] == 3) echo 'selected'; ?>>ENTREGADO</option>
-                                <option value="4" <?php if($orden['IdEstatusOrden'] == 4) echo 'selected'; ?>>CANCELADA</option>
-                            </select>
-                            <button type="submit" class="btn btn-primary mt-2">Cambiar</button>
-                        </form>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-sm text-center mx-auto">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID Orden</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Fecha de la Orden</th>
+                        <th scope="col">Estatus</th>
+                        <th scope="col">Cambiar Estatus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($ordenes as $orden): ?>
+                    <tr>
+                        <td><?php echo $orden['IdOrden']; ?></td>
+                        <td><?php echo $orden['NombreUsuario']; ?></td>
+                        <td><?php echo $orden['FechaOrden']; ?></td>
+                        <td><?php echo $orden['NombreEstatus']; ?></td>
+                        <td>
+                            <form action="cambiar_estatus.php" method="post">
+                                <input type="hidden" name="idOrden" value="<?php echo $orden['IdOrden']; ?>">
+                                <select class="form-control" name="nuevoEstatus">
+                                    <option value="1" <?php if($orden['IdEstatusOrden'] == 1) echo 'selected'; ?>>ACTIVO</option>
+                                    <option value="2" <?php if($orden['IdEstatusOrden'] == 2) echo 'selected'; ?>>PREPARANDO</option>
+                                    <option value="3" <?php if($orden['IdEstatusOrden'] == 3) echo 'selected'; ?>>ENTREGADO</option>
+                                    <option value="4" <?php if($orden['IdEstatusOrden'] == 4) echo 'selected'; ?>>CANCELADA</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary btn-sm mt-2">Cambiar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
