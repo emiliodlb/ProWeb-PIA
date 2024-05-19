@@ -61,19 +61,22 @@ $resultado = conexion::obtener_conexion()->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <style>
-        .producto {
-            margin-bottom: 20px;
-        }
-    </style>
+    <style>.producto {margin-bottom: 20px;}</style>
 </head>
 <body>
     <div class="container">
         <h1 class="mt-5 mb-4">Catálogo de Productos</h1>
-        <h3 class="text-center">Usuario, <?php echo $usuario['NombreUsuario']; ?>!</h3>
+        <div class="row mt-3">
+            <div class="col-md-12 text-center">
+                <a href="inicio.php" class="btn btn-secondary">Regresar</a>
+                <a href="carrito.php" class="btn btn-primary">Ver Carrito</a>
+            </div>
+        </div>
         <div class="d-flex justify-content-between">
-        <a href="inicio.php" class="btn btn-secondary mt-3">Regresar</a>
+        
+        <br>
     </div>
+        <br>
         <div class="row">
             <!-- productos -->
             <?php
@@ -102,11 +105,6 @@ $resultado = conexion::obtener_conexion()->query($sql);
                 echo "<div class='col-md-12'>No se encontraron productos.</div>";
             }
             ?>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-12 text-center">
-                <a href="carrito.php" class="btn btn-primary">Ver Carrito</a>
-            </div>
         </div>
     </div>
 

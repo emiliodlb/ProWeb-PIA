@@ -11,7 +11,7 @@ if (!isset($_SESSION['usuario'])) {
 
 $usuario = $_SESSION['usuario'];
 
-//ELIMINACION EN DB
+// ELIMINACION EN DB
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
     $idUsuario = $usuario['IdUsuario'];
     $idProducto = $_POST['idProducto'];
@@ -42,6 +42,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
 
         conexion::cerrar_conexion();
         header("Location: carrito.php");
+        exit();
+    } catch (PDOException $ex) {
+        print "ERROR: " . $ex->getMessage() . "<br>";
+        die();
+    }
+}
+
+// cONFIRMAR
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar'])) {
+    try {
+        conexion::abrir_conexion();
+        $conexion = conexion::obtener_conexion();
+
+        //crear orden con los productos del carrito
+        $productos = funciones_carrito::obtener_productos_carrito($usuario['IdUsuario']);
+        $totalOrden = 0;
+
+        //calcular total
+        foreach ($productos as $producto) {
+            $totalOrden += $producto['Total'];
+        }
+        date_default_timezone_set('America/Mexico_City');
+        //insertar orden en DB
+        $fechaOrden = date('Y-m-d H:i:s');
+        $idMesa = $usuario['IdUsuario'];
+        $idEstatusOrden = 1; 
+        $sql = "INSERT INTO orden (TotalOrden, FechaOrden, IdMesa, IdEstatusOrden) VALUES (:totalOrden, :fechaOrden, :idMesa, :idEstatusOrden)";
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->bindParam(':totalOrden', $totalOrden, PDO::PARAM_STR);
+        $sentencia->bindParam(':fechaOrden', $fechaOrden, PDO::PARAM_STR);
+        $sentencia->bindParam(':idMesa', $idMesa, PDO::PARAM_INT);
+        $sentencia->bindParam(':idEstatusOrden', $idEstatusOrden, PDO::PARAM_INT);
+        $sentencia->execute();
+
+        $idOrden = $conexion->lastInsertId();
+
+        // Insertar detalle
+        foreach ($productos as $producto) {
+            $idProducto = $producto['IdProducto'];
+            $cantidad = $producto['Cantidad'];
+            $precio = $producto['PrecioProducto'];
+            $sql = "INSERT INTO detalleorden (IdOrden, IdProducto, Cantidad, Precio) VALUES (:idOrden, :idProducto, :cantidad, :precio)";
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->bindParam(':idOrden', $idOrden, PDO::PARAM_INT);
+            $sentencia->bindParam(':idProducto', $idProducto, PDO::PARAM_INT);
+            $sentencia->bindParam(':cantidad', $cantidad, PDO::PARAM_INT);
+            $sentencia->bindParam(':precio', $precio, PDO::PARAM_STR);
+            $sentencia->execute();
+        }
+
+        // Eliminar todos los productos del carrito
+        $sql = "DELETE FROM carrito WHERE idusuario = :idUsuario";
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
+        $sentencia->execute();
+
+        conexion::cerrar_conexion();
+        header("Location: orden_creada.php?idOrden=$idOrden");
         exit();
     } catch (PDOException $ex) {
         print "ERROR: " . $ex->getMessage() . "<br>";
@@ -107,15 +165,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
             </tbody>
         </table>
         <div class="text-right">
-            <!-- Mostrar el total del carrito -->
-            <h5>Total: $<?php echo number_format($totalCarrito, 2); ?></h5>
-            <button class="btn btn-primary">Confirmar</button>
+            <?php if (!empty($productos)) : ?>
+                <!-- Mostrar el total del carrito -->
+                <h5>Total: $<?php echo number_format($totalCarrito, 2); ?></h5>
+                <!-- Formulario para confirmar la orden -->
+                <form method="post" action="">
+                    <button  type="submit" name="confirmar" class="btn btn-primary">Confirmar</button>
+                </form>
+            <?php endif; ?>
             <a href="menu_productos.php" class="btn btn-secondary">Seguir Añadiendo</a>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
+
