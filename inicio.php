@@ -29,7 +29,7 @@
             $rol = $usuario['IdRol'];
             switch ($rol) {
                 case 1: // Si el rol es 1
-                    $generar_orden_link = 'index_carrito.php';
+                    $generar_orden_link = 'generar_orden.php';
                     $mesas_disponibles_link = 'mesas_disponibles.php';
                     $historial_ordenes_link = 'historial_ordenes.php';
                     $modificar_orden_link = 'modificar_orden.php';
@@ -37,7 +37,7 @@
                     $visualizar_empleados_link = 'visualizar_empleados_admin.php';
                     break;
                 case 2: // Si el rol es 2
-                    $generar_orden_link = 'index_carrito.php';
+                    $generar_orden_link = 'modificar_orden.php';
                     $mesas_disponibles_link = 'mesas_disponibles.php';
                     $historial_ordenes_link = 'historial_ordenes.php';
                     $modificar_orden_link = 'modificar_orden.php';
@@ -45,7 +45,7 @@
                     $visualizar_empleados_link = 'visualizar_empleados.php';
                     break;
                 case 3: // Si el rol es 3
-                    $generar_orden_link = 'index_carrito.php';
+                    $generar_orden_link = 'generar_orden.php';
                     $mesas_disponibles_link = 'mesas_disponibles.php';
                     $historial_ordenes_link = 'historial_ordenes.php';
                     $modificar_orden_link = 'modificar_orden.php';
@@ -78,7 +78,7 @@
             </div>
             <div class="col-md-4">
                 <a href="<?php echo $modificar_orden_link; ?>" class="btn btn-secondary btn-dashboard">
-                    Estatus de Orden
+                    Modificar Orden
                     <img src="img/modificar_orden.png">
                 </a>
             </div>
