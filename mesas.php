@@ -13,7 +13,7 @@ include_once 'app/conexion.inc.php';
 conexion::abrir_conexion();
 
 // Obtener las mesas disponibles de la DB
-$sql = "SELECT * FROM usuario WHERE DisponibilidadMesa = 'Disponible'";
+$sql = "SELECT * FROM usuario WHERE DisponibilidadMesa = '1 OR 0'";
 $stmt = conexion::obtener_conexion()->prepare($sql);
 $stmt->execute();
 $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
