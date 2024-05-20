@@ -46,10 +46,10 @@
                     break;
                 case 3: // Si el rol es 3
                     $generar_orden_link = 'menu_productos.php';
-                    $mesas_disponibles_link = 'mesas_disponibles.php';
-                    $historial_ordenes_link = 'historial_ordenes.php';
-                    $modificar_orden_link = 'modificar_estatus.php';
-                    $visualizar_productos_link = '#';
+                    $mesas_disponibles_link = '#';
+                    $historial_ordenes_link = 'historial_ordenes_cliente.php';
+                    $modificar_orden_link = '#';
+                    $visualizar_productos_link = 'visualizar_productos.php';
                     $visualizar_empleados_link = '#';
                     break;
                 default:
