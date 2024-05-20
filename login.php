@@ -23,7 +23,7 @@
                         <a class="nav-link" href="">Login<span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Quiénes Somos</a>
+                        <a class="nav-link" href="Quienes_Somos.html">Quiénes Somos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">Sucursales</a>
