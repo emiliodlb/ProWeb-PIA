@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quienes_Somos</title>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="stylesheet" href="styles_quienes_somos.css">
+    <link rel="stylesheet" href="styles/quienes_somos.css">
     <link rel="shortcut icon" href="img/icon_logo.png">
 </head>
 <body>
