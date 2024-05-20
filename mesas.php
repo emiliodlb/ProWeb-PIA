@@ -12,8 +12,20 @@ include_once 'app/conexion.inc.php';
 
 conexion::abrir_conexion();
 
-// Obtener las mesas disponibles de la DB
-$sql = "SELECT * FROM usuario WHERE DisponibilidadMesa = '1 OR 0'";
+// Procesar cambio de disponibilidad
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['idusuario'])) {
+    $idUsuario = $_POST['idusuario'];
+    $nuevaDisponibilidad = $_POST['disponibilidad'] == 1 ? 0 : 1;
+
+    $sql = "UPDATE usuario SET DisponibilidadMesa = :disponibilidad WHERE idUsuario = :idusuario";
+    $stmt = conexion::obtener_conexion()->prepare($sql);
+    $stmt->bindParam(':disponibilidad', $nuevaDisponibilidad);
+    $stmt->bindParam(':idusuario', $idUsuario);
+    $stmt->execute();
+}
+
+// Obtener todas las mesas de la DB
+$sql = "SELECT * FROM usuario";
 $stmt = conexion::obtener_conexion()->prepare($sql);
 $stmt->execute();
 $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -44,26 +56,34 @@ conexion::cerrar_conexion();
             <!-- mesas -->
             <?php
             if (count($resultado) > 0) {
-                // Mostrar las mesas disponibles
+                // Mostrar todas las mesas
                 foreach ($resultado as $mesa) {
                     ?>
                     <div class="col-md-4 mesa">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Mesa de <?php echo htmlspecialchars($mesa['NombreUsuario']); ?></h5>
-                                <p class="card-text">Teléfono: <?php echo htmlspecialchars($mesa['TelefonoUsuario']); ?></p>
+                                <h5 class="card-title"><?php echo htmlspecialchars($mesa['NombreUsuario']); ?></h5>
                                 <p class="card-text">Lugar: <?php echo htmlspecialchars($mesa['LugarMesa']); ?></p>
                                 <p class="card-text">Espacio: <?php echo htmlspecialchars($mesa['EspacioMesa']); ?></p>
-                                <p class="card-text">Disponibilidad: <?php echo htmlspecialchars($mesa['DisponibilidadMesa']); ?></p>
-                                <p class="card-text">Mesa Usuario: <?php echo htmlspecialchars($mesa['MesaUsuario']); ?></p>
+                                <p class="card-text">Disponibilidad: 
+                                    <?php echo $mesa['DisponibilidadMesa'] == 1 ? 'DISPONIBLE' : 'OCUPADA'; ?>
+                                </p>
                                 <p class="card-text">ID Rol: <?php echo htmlspecialchars($mesa['IdRol']); ?></p>
+                                <!-- Form para cambiar la disponibilidad -->
+                                <form action="#" method="post">
+                                    <input type="hidden" name="idusuario" value="<?php echo $mesa['idUsuario']; ?>">
+                                    <input type="hidden" name="disponibilidad" value="<?php echo $mesa['DisponibilidadMesa']; ?>">
+                                    <button type="submit" class="btn btn-primary">
+                                        <?php echo $mesa['DisponibilidadMesa'] == 1 ? 'Marcar como Ocupada' : 'Marcar como Disponible'; ?>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <?php
                 }
             } else {
-                echo "<div class='col-md-12'>No se encontraron mesas disponibles.</div>";
+                echo "<div class='col-md-12'>No se encontraron mesas.</div>";
             }
             ?>
         </div>
