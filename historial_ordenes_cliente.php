@@ -14,7 +14,8 @@ $query = "SELECT o.IdOrden, o.TotalOrden, o.FechaOrden, u.NombreUsuario as Mesa,
           FROM orden o
           JOIN usuario u ON o.IdMesa = u.IdUsuario
           JOIN estatusorden e ON o.IdEstatusOrden = e.IdEstatusOrden
-          WHERE u.IdUsuario = :idUsuario"; //filtra por el id del usuario
+          WHERE u.IdUsuario = :idUsuario
+          ORDER BY o.FechaOrden DESC"; 
 
 $stmt = $conn->prepare($query);
 $stmt->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);

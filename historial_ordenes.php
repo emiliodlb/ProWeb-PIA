@@ -6,7 +6,8 @@ $conn = conexion::obtener_conexion();
 $query = "SELECT o.IdOrden, o.TotalOrden, o.FechaOrden, u.NombreUsuario as Mesa, e.NombreEstatus as Estatus 
           FROM orden o
           JOIN usuario u ON o.IdMesa = u.IdUsuario
-          JOIN estatusorden e ON o.IdEstatusOrden = e.IdEstatusOrden";
+          JOIN estatusorden e ON o.IdEstatusOrden = e.IdEstatusOrden
+          ORDER BY o.FechaOrden DESC";
 
 $stmt = $conn->prepare($query);
 $stmt->execute();
