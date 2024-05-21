@@ -17,15 +17,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['idusuario'])) {
     $idUsuario = $_POST['idusuario'];
     $nuevaDisponibilidad = $_POST['disponibilidad'] == 1 ? 0 : 1;
 
-    $sql = "UPDATE usuario SET DisponibilidadMesa = :disponibilidad WHERE idUsuario = :idusuario";
+    $sql = "UPDATE usuario SET DisponibilidadMesa = :disponibilidad WHERE IdUsuario = :idusuario";
     $stmt = conexion::obtener_conexion()->prepare($sql);
     $stmt->bindParam(':disponibilidad', $nuevaDisponibilidad);
     $stmt->bindParam(':idusuario', $idUsuario);
     $stmt->execute();
 }
 
-// Obtener todas las mesas de la DB
-$sql = "SELECT * FROM usuario";
+// Obtener las mesas con IdRol 3 de la DB
+$sql = "SELECT * FROM usuario WHERE IdRol = 3";
 $stmt = conexion::obtener_conexion()->prepare($sql);
 $stmt->execute();
 $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -56,7 +56,7 @@ conexion::cerrar_conexion();
             <!-- mesas -->
             <?php
             if (count($resultado) > 0) {
-                // Mostrar todas las mesas
+                // Mostrar las mesas con IdRol 3
                 foreach ($resultado as $mesa) {
                     ?>
                     <div class="col-md-4 mesa">
@@ -71,7 +71,7 @@ conexion::cerrar_conexion();
                                 <p class="card-text">ID Rol: <?php echo htmlspecialchars($mesa['IdRol']); ?></p>
                                 <!-- Form para cambiar la disponibilidad -->
                                 <form action="#" method="post">
-                                    <input type="hidden" name="idusuario" value="<?php echo $mesa['idUsuario']; ?>">
+                                    <input type="hidden" name="idusuario" value="<?php echo $mesa['IdUsuario']; ?>">
                                     <input type="hidden" name="disponibilidad" value="<?php echo $mesa['DisponibilidadMesa']; ?>">
                                     <button type="submit" class="btn btn-primary">
                                         <?php echo $mesa['DisponibilidadMesa'] == 1 ? 'Marcar como Ocupada' : 'Marcar como Disponible'; ?>
