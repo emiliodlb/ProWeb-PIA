@@ -46,11 +46,7 @@
                     break;
                 case 3: // Si el rol es 3
                     $generar_orden_link = 'menu_productos.php';
-                    $mesas_disponibles_link = 'mesas.php';
                     $historial_ordenes_link = 'historial_ordenes.php';
-                    $modificar_orden_link = '#';
-                    $visualizar_productos_link = '#';
-                    $visualizar_empleados_link = '#';
                     break;
                 default:
                     
@@ -64,18 +60,24 @@
                     <img src="img/generar_orden.png">
                 </a>
             </div>
+
+            <?php if ($rol != 3) : ?>
             <div class="col-md-4">
                 <a href="<?php echo $mesas_disponibles_link; ?>" class="btn btn-secondary btn-dashboard">
                     Mesas Disponibles
                     <img src="img/mesas_disponibles.png">
                 </a>
             </div>
+            <?php endif; ?>
+
             <div class="col-md-4">
                 <a href="<?php echo $historial_ordenes_link; ?>" class="btn btn-secondary btn-dashboard">
                     Historial de Órdenes
                     <img src="img/historial_ordenes.png">
                 </a>
             </div>
+
+            <?php if ($rol != 3) : ?>
             <div class="col-md-4">
                 <a href="<?php echo $modificar_orden_link; ?>" class="btn btn-secondary btn-dashboard">
                     Modificar Estatus
@@ -94,13 +96,14 @@
                     <img src="img/visualizar_empleados.png">
                 </a>
             </div>
+            <?php endif; ?>
         </div>
     </div>
     <div class="container">
-    <div class="text-center mt-3">
-        <a href="index.html" class="btn btn-secondary back-to-index">Regresar</a>
+        <div class="text-center mt-3">
+            <a href="index.html" class="btn btn-secondary back-to-index">Regresar</a>
+        </div>
     </div>
-</div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="scripts/bootstrap.bundle.min.js"></script>
 </body>
