@@ -1,94 +1,63 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['usuario'])) {
-    header('Location: login.php');
-    exit;
-}
-
-$usuario = $_SESSION['usuario'];
-
-include_once 'app/conexion.inc.php';
-
-conexion::abrir_conexion();
-
-// Procesar cambio de disponibilidad
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['idusuario'])) {
-    $idUsuario = $_POST['idusuario'];
-    $nuevaDisponibilidad = $_POST['disponibilidad'] == 1 ? 0 : 1;
-
-    $sql = "UPDATE usuario SET DisponibilidadMesa = :disponibilidad WHERE idUsuario = :idusuario";
-    $stmt = conexion::obtener_conexion()->prepare($sql);
-    $stmt->bindParam(':disponibilidad', $nuevaDisponibilidad);
-    $stmt->bindParam(':idusuario', $idUsuario);
-    $stmt->execute();
-}
-
-// Obtener todas las mesas de la DB
-$sql = "SELECT * FROM usuario";
-$stmt = conexion::obtener_conexion()->prepare($sql);
-$stmt->execute();
-$resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-conexion::cerrar_conexion();
-?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Mesas Disponibles</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios del Restaurante</title>
+    <link rel="stylesheet" href="styles/mesa.css">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <style>.mesa {margin-bottom: 20px;}</style>
+    <link rel="shortcut icon" href="img/icon_logo.png">
+
 </head>
 <body>
-    <div class="container">
-        <h1 class="mt-5 mb-4">Mesas Disponibles</h1>
-        
-        <div class="d-flex justify-content-between mb-6">
-            <div>
-                <a href="inicio.php" class="btn btn-outline-primary">Regresar a Inicio</a>
-            </div>
-        </div>
-        
-        <br>
-        <div class="row">
-            <!-- mesas -->
-            <?php
-            if (count($resultado) > 0) {
-                // Mostrar todas las mesas
-                foreach ($resultado as $mesa) {
-                    ?>
-                    <div class="col-md-4 mesa">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo htmlspecialchars($mesa['NombreUsuario']); ?></h5>
-                                <p class="card-text">Lugar: <?php echo htmlspecialchars($mesa['LugarMesa']); ?></p>
-                                <p class="card-text">Espacio: <?php echo htmlspecialchars($mesa['EspacioMesa']); ?></p>
-                                <p class="card-text">Disponibilidad: 
-                                    <?php echo $mesa['DisponibilidadMesa'] == 1 ? 'DISPONIBLE' : 'OCUPADA'; ?>
-                                </p>
-                                <p class="card-text">ID Rol: <?php echo htmlspecialchars($mesa['IdRol']); ?></p>
-                                <!-- Form para cambiar la disponibilidad -->
-                                <form action="#" method="post">
-                                    <input type="hidden" name="idusuario" value="<?php echo $mesa['idUsuario']; ?>">
-                                    <input type="hidden" name="disponibilidad" value="<?php echo $mesa['DisponibilidadMesa']; ?>">
-                                    <button type="submit" class="btn btn-primary">
-                                        <?php echo $mesa['DisponibilidadMesa'] == 1 ? 'Marcar como Ocupada' : 'Marcar como Disponible'; ?>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                }
-            } else {
-                echo "<div class='col-md-12'>No se encontraron mesas.</div>";
-            }
-            ?>
-        </div>
-    </div>
+    <div class="container mt-5">
+        <h1 class="text-center">Disponibilidad de Mesas</h1>
+        <br><a href="inicio.php" class="btn btn-secondary mb-3">Ir a Inicio</a><br>
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Lugar Mesa</th>
+                    <th>Espacio Mesa</th>
+                    <th>Disponibilidad Mesa</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                include_once 'app/conexion.inc.php';
+                conexion::abrir_conexion();
+                $conexion = conexion::obtener_conexion();
+                
+                $sql = 'SELECT * FROM usuario WHERE IdRol = 3';
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $usuarios = $sentencia->fetchAll();
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                foreach ($usuarios as $usuario) {
+                    $row_class = $usuario['DisponibilidadMesa'] ? 'disponible' : 'no-disponible';
+                    echo '<tr class="' . $row_class . '">';
+                    echo '<td>' . $usuario['NombreUsuario'] . '</td>';
+                    echo '<td>' . $usuario['LugarMesa'] . '</td>';
+                    echo '<td>' . $usuario['EspacioMesa'] . '</td>';
+                    echo '<td>' . ($usuario['DisponibilidadMesa'] ? 'Disponible' : 'No Disponible') . '</td>';
+                    echo '<td>';
+                    echo '<form action="app/mesasdisponibles.php" method="post" style="display:inline-block;">';
+                    echo '<input type="hidden" name="idusuario" value="' . $usuario['IdUsuario'] . '">';
+                    echo '<button type="submit" name="disponibilidad" value="1" class="btn btn-success">Disponible</button>';
+                    echo '</form>';
+                    echo '<form action="app/mesasdisponibles.php" method="post" style="display:inline-block;">';
+                    echo '<input type="hidden" name="idusuario" value="' . $usuario['IdUsuario'] . '">';
+                    echo '<button type="submit" name="disponibilidad" value="0" class="btn btn-danger">No Disponible</button>';
+                    echo '</form>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+
+                conexion::cerrar_conexion();
+                ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
