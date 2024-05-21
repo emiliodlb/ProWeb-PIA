@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios del Restaurante</title>
-    <link rel="stylesheet" href="styles/mesa.css">
+    <link href="styles/mesa.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="shortcut icon" href="img/icon_logo.png">
-
+    <style>
+        .disponible {
+            background-color: #d4edda; /* Verde pastel */
+        }
+        .no-disponible {
+            background-color: #f8d7da; /* Rojo pastel */
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Disponibilidad de Mesas</h1>
-        <br><a href="inicio.php" class="btn btn-secondary mb-3">Ir a Inicio</a><br>
+        <h1 class="text-center">Usuarios del Restaurante</h1>
         <table class="table table-bordered text-center">
             <thead>
                 <tr>
